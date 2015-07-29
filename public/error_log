@@ -1,0 +1,46 @@
+[21-May-2014 09:31:43 America/Denver] PHP Fatal error:  require(): Failed opening required '/home3/sullivi2/public_html/evan/vendor/swiftmailer/swiftmailer/lib/swift_required.php' (include_path='/home3/sullivi2/public_html/evan/vendor/phpseclib/phpseclib/phpseclib:/home3/sullivi2/public_html/evan/vendor/phpunit/php-text-template:/home3/sullivi2/public_html/evan/vendor/phpunit/phpunit-mock-objects:/home3/sullivi2/public_html/evan/vendor/phpunit/php-timer:/home3/sullivi2/public_html/evan/vendor/phpunit/php-file-iterator:/home3/sullivi2/public_html/evan/vendor/phpunit/phpunit:/home3/sullivi2/public_html/evan/vendor/symfony/yaml:/home3/sullivi2/public_html/evan/vendor/phpunit/php-token-stream:/home3/sullivi2/public_html/evan/vendor/phpunit/php-code-coverage:.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home3/sullivi2/public_html/evan/vendor/composer/autoload_real.php on line 61
+[22-May-2014 18:23:04 America/New_York] PHP Warning:  Uncaught exception 'ErrorException' with message 'Undefined variable: db' in /home3/sullivi2/public_html/evan/app/controllers/LoginController.php:89
+Stack trace:
+#0 /home3/sullivi2/public_html/evan/app/controllers/LoginController.php(89): Illuminate\Exception\Handler->handleError(8, 'Undefined varia...', '/home3/sullivi2...', 89, Array)
+#1 [internal function]: LoginController->userList()
+#2 /home3/sullivi2/public_html/evan/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(231): call_user_func_array(Array, Array)
+#3 /home3/sullivi2/public_html/evan/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(93): Illuminate\Routing\Controller->callAction('userList', Array)
+#4 /home3/sullivi2/public_html/evan/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(62): Illuminate\Routing\ControllerDispatcher->call(Object(LoginController), Object(Illuminate\Routing\Route), 'userList')
+#5 /home3/sullivi2/public_html/evan/vendor/laravel/framework/src/Illuminate/Routing/Rou in /home3/sullivi2/public_html/evan/app/controllers/LoginController.php on line 89
+[22-May-2014 18:23:04 America/New_York] PHP Fatal error:  Call to a member function prepare() on a non-object in /home3/sullivi2/public_html/evan/app/controllers/LoginController.php on line 89
+[22-May-2014 18:44:01 America/New_York] PHP Fatal error:  Cannot use object of type stdClass as array in /home3/sullivi2/public_html/evan/app/storage/views/ca77e228a3ea6ae474a2b56517132cae on line 207
+[22-May-2014 18:45:56 America/New_York] PHP Fatal error:  Cannot use object of type stdClass as array in /home3/sullivi2/public_html/evan/app/storage/views/ca77e228a3ea6ae474a2b56517132cae on line 217
+[22-May-2014 18:47:37 America/New_York] PHP Parse error:  syntax error, unexpected '"' in /home3/sullivi2/public_html/evan/app/storage/views/ca77e228a3ea6ae474a2b56517132cae on line 227
+[22-May-2014 18:48:59 America/New_York] PHP Parse error:  syntax error, unexpected '"]==0): ?>' (T_CONSTANT_ENCAPSED_STRING) in /home3/sullivi2/public_html/evan/app/storage/views/ca77e228a3ea6ae474a2b56517132cae on line 367
+[22-May-2014 18:49:44 America/New_York] PHP Parse error:  syntax error, unexpected '"]==0): ?>' (T_CONSTANT_ENCAPSED_STRING) in /home3/sullivi2/public_html/evan/app/storage/views/ca77e228a3ea6ae474a2b56517132cae on line 367
+[22-May-2014 18:49:59 America/New_York] PHP Parse error:  syntax error, unexpected '"]; ?>"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home3/sullivi2/public_html/evan/app/storage/views/ca77e228a3ea6ae474a2b56517132cae on line 398
+[22-May-2014 21:28:41 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home3/sullivi2/public_html/evan/app/controllers/LoginController.php on line 118
+[22-May-2014 21:29:48 America/New_York] PHP Fatal error:  Call to undefined function where() in /home3/sullivi2/public_html/evan/app/controllers/LoginController.php on line 116
+[22-May-2014 21:29:59 America/New_York] PHP Fatal error:  Call to undefined function get() in /home3/sullivi2/public_html/evan/app/controllers/LoginController.php on line 117
+[22-May-2014 22:48:47 America/New_York] PHP Fatal error:  Call to a member function rowCount() on a non-object in /home3/sullivi2/public_html/evan/app/controllers/LoginController.php on line 164
+[22-May-2014 22:50:32 America/New_York] PHP Fatal error:  Cannot use object of type stdClass as array in /home3/sullivi2/public_html/evan/app/storage/views/a66380a7795f2e1f57ab2162923958f4 on line 76
+[22-May-2014 23:28:34 America/New_York] PHP Fatal error:  Cannot use object of type stdClass as array in /home3/sullivi2/public_html/evan/app/storage/views/a66380a7795f2e1f57ab2162923958f4 on line 223
+[22-May-2014 23:28:43 America/New_York] PHP Fatal error:  Cannot use object of type stdClass as array in /home3/sullivi2/public_html/evan/app/storage/views/a66380a7795f2e1f57ab2162923958f4 on line 223
+[22-May-2014 23:37:38 America/New_York] PHP Fatal error:  Cannot use object of type stdClass as array in /home3/sullivi2/public_html/evan/app/storage/views/a66380a7795f2e1f57ab2162923958f4 on line 252
+[22-May-2014 23:37:57 America/New_York] PHP Warning:  Uncaught exception 'ErrorException' with message 'Undefined variable: getDelegate' in /home3/sullivi2/public_html/evan/app/storage/views/a66380a7795f2e1f57ab2162923958f4:135
+Stack trace:
+#0 /home3/sullivi2/public_html/evan/app/storage/views/a66380a7795f2e1f57ab2162923958f4(135): Illuminate\Exception\Handler->handleError(8, 'Undefined varia...', '/home3/sullivi2...', 135, Array)
+#1 /home3/sullivi2/public_html/evan/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(37): include('/home3/sullivi2...')
+#2 /home3/sullivi2/public_html/evan/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(56): Illuminate\View\Engines\PhpEngine->evaluatePath('/home3/sullivi2...', Array)
+#3 /home3/sullivi2/public_html/evan/vendor/laravel/framework/src/Illuminate/View/View.php(134): Illuminate\View\Engines\CompilerEngine->get('/home3/sullivi2...', Array)
+#4 /home3/sullivi2/public_html/evan/vendor/laravel/framework/src/Illuminate/View/View.php(102): Illuminate\View\View->getContents()
+#5 /home3/sull in /home3/sullivi2/public_html/evan/app/storage/views/a66380a7795f2e1f57ab2162923958f4 on line 135
+[22-May-2014 23:37:57 America/New_York] PHP Fatal error:  Call to a member function rowCount() on a non-object in /home3/sullivi2/public_html/evan/app/storage/views/a66380a7795f2e1f57ab2162923958f4 on line 135
+[22-May-2014 23:41:22 America/New_York] PHP Fatal error:  Cannot use object of type stdClass as array in /home3/sullivi2/public_html/evan/app/storage/views/a66380a7795f2e1f57ab2162923958f4 on line 222
+[22-May-2014 23:41:26 America/New_York] PHP Fatal error:  Cannot use object of type stdClass as array in /home3/sullivi2/public_html/evan/app/storage/views/a66380a7795f2e1f57ab2162923958f4 on line 222
+[22-May-2014 23:59:59 America/New_York] PHP Parse error:  syntax error, unexpected ';' in /home3/sullivi2/public_html/evan/app/storage/views/a66380a7795f2e1f57ab2162923958f4 on line 12
+[23-May-2014 00:04:40 America/New_York] PHP Parse error:  syntax error, unexpected 'List' (T_LIST) in /home3/sullivi2/public_html/evan/app/storage/views/a66380a7795f2e1f57ab2162923958f4 on line 129
+[24-May-2014 20:40:59 America/New_York] PHP Parse error:  syntax error, unexpected 'Acme' (T_STRING) in /home3/sullivi2/public_html/rvdrexel/app/controllers/CalendarController.php on line 3
+[24-May-2014 20:40:59 America/New_York] PHP Parse error:  syntax error, unexpected 'Acme' (T_STRING) in /home3/sullivi2/public_html/rvdrexel/app/controllers/CalendarController.php on line 3
+[24-May-2014 20:41:38 America/New_York] PHP Parse error:  syntax error, unexpected 'Acme' (T_STRING) in /home3/sullivi2/public_html/rvdrexel/app/controllers/CalendarController.php on line 3
+[24-May-2014 20:41:38 America/New_York] PHP Parse error:  syntax error, unexpected 'Acme' (T_STRING) in /home3/sullivi2/public_html/rvdrexel/app/controllers/CalendarController.php on line 3
+[24-May-2014 20:41:40 America/New_York] PHP Parse error:  syntax error, unexpected 'Acme' (T_STRING) in /home3/sullivi2/public_html/rvdrexel/app/controllers/CalendarController.php on line 3
+[24-May-2014 20:42:42 America/New_York] PHP Parse error:  syntax error, unexpected 'Acme' (T_STRING) in /home3/sullivi2/public_html/rvdrexel/app/controllers/CalendarController.php on line 3
+[24-May-2014 20:42:42 America/New_York] PHP Parse error:  syntax error, unexpected 'Acme' (T_STRING) in /home3/sullivi2/public_html/rvdrexel/app/controllers/CalendarController.php on line 3
+[24-May-2014 20:42:44 America/New_York] PHP Parse error:  syntax error, unexpected 'Acme' (T_STRING) in /home3/sullivi2/public_html/rvdrexel/app/controllers/CalendarController.php on line 3
+[24-May-2014 20:42:44 America/New_York] PHP Parse error:  syntax error, unexpected 'Acme' (T_STRING) in /home3/sullivi2/public_html/rvdrexel/app/controllers/CalendarController.php on line 3

@@ -1,0 +1,265 @@
+<?php
+/*
+|--------------------------------------------------------------------------
+| room Controller
+|--------------------------------------------------------------------------
+|
+| An example controller that uses the pre-baked RESTful resource controller
+| actions for index, create, store, show, edit, update, destroy, as well as a
+| delete method to show the record before deletion.
+|
+| See routes.php  ->
+| Route::resource('room', 'roomController');
+| Route::get('room/{room}/delete', 'roomController@delete');
+|
+*/
+
+class RoomController extends BaseController
+{
+    /**
+     * room Model
+     * @var room
+     */
+    protected $room;
+
+    /**
+     * Inject the model.
+     * @param room $room
+     */
+    public function __construct(room $room)
+    {
+        parent::__construct();
+        $this->room = $room;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * See public function data() below for the data source for the list,
+     * and the view/room/index.blade.php for the jQuery script that makes
+     * the Ajax request.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        // Title
+        $title = Lang::get('room/title.room_management');
+
+        // Show the page
+        return View::make('room/index', compact('title'));
+    }
+
+    /**
+     * Show a single room details page.
+     *
+     * @return View
+     */
+    public function show($id)
+    {
+        $room = $this->room->find($id);
+
+        if ($room->id) {
+            // Title
+            $title = Lang::get('room/title.room_show');
+
+            // Show the page
+            return View::make('room/show', compact('room', 'title'));
+
+        } else {
+            // Redirect to the room management page
+            return Redirect::to('rooms')->with('error', Lang::get('room/messages.does_not_exist'));
+        }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        // Title
+        $title = Lang::get('room/title.create_a_new_room');
+
+        // Show the page
+        return View::make('room/create', compact('title'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        // Validate the inputs
+        $rules = array(
+            'name'=> 'required|alpha_dash|unique:rooms,name',
+            'description'=> 'required'
+            );
+
+        // Validate the inputs
+        $validator = Validator::make(Input::all(), $rules);
+
+        // Check if the form validates with success
+        if ($validator->passes()) {
+            
+            // Get the inputs, with some exceptions
+            $inputs = Input::except('csrf_token');
+
+            $this->room->name = $inputs['name'];
+            $this->room->description = $inputs['description'];
+
+            if ($this->room->save($rules)) {
+                // Redirect to the new room page
+                return Redirect::to('rooms')->with('success', Lang::get('room/messages.create.success'));
+
+            } else {
+                // Redirect to the room create page
+                //var_dump($this->room);
+                return Redirect::to('rooms/create')->with('error', Lang::get('room/messages.create.error'));
+            }
+        } else {
+            // Form validation failed
+            return Redirect::to('rooms/create')->withInput()->withErrors($validator);
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param $room
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $room = $this->room->find($id);
+
+        if ($room->id) {
+
+        } else {
+            // Redirect to the room management page
+            return Redirect::to('rooms')->with('error', Lang::get('room/messages.does_not_exist'));
+        }
+
+        // Title
+        $title = Lang::get('room/title.room_update');
+
+        // Show the page
+        return View::make('room/edit', compact('room', 'title'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param $room
+     * @return Response
+     */
+    public function update($id)
+    {
+        $room = $this->room->find($id);
+
+        $rules = array(
+                'name'=> 'required|alpha_dash|unique:rooms,name,' . $room->id,
+                'description' => 'required'
+            );
+
+        // Validate the inputs
+        $validator = Validator::make(Input::all(), $rules);
+
+        // Check if the form validates with success
+        if ($validator->passes()) {
+
+            // Get the inputs, with some exceptions
+            $inputs = Input::except('csrf_token');
+
+            $room->name = $inputs['name'];
+            $room->description = $inputs['description'];
+
+            // Was the room updated?
+            if ($room->save($rules)) {
+                // Redirect to the room page
+                return Redirect::to('rooms/' . $room->id . '/edit')->with('success', Lang::get('room/messages.update.success'));
+            } else {
+                // Redirect to the room page
+                return Redirect::to('rooms/' . $room->id . '/edit')->with('error', Lang::get('room/messages.update.error'));
+            }
+        } else {
+            // Form validation failed
+            return Redirect::to('rooms/' . $room->id . '/edit')->withInput()->withErrors($validator);
+        }
+    }
+
+    /**
+     * Remove room page.
+     *
+     * @param $room
+     * @return Response
+     */
+    public function delete($id)
+    {
+        $room = $this->room->find($id);
+
+        // Title
+        $title = Lang::get('room/title.room_delete');
+
+        if ($room->id) {
+
+        } else {
+            // Redirect to the room management page
+            return Redirect::to('rooms')->with('error', Lang::get('room/messages.does_not_exist'));
+        }
+
+        // Show the record
+        return View::make('room/delete', compact('room', 'title'));
+    }
+
+    /**
+     * Remove the specified room from storage.
+     * @internal param $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $room = $this->room->find($id);
+
+        // Was the room deleted?
+        if ($room->delete()) {
+            // Redirect to the room management page
+            return Redirect::to('rooms')->with('success', Lang::get('room/messages.delete.success'));
+        }
+
+        // There was a problem deleting the room
+        return Redirect::to('rooms')->with('error', Lang::get('room/messages.delete.error'));
+    }
+
+    /**
+     * Show a list of all the rooms formatted for Datatables.
+     *
+     * @return Datatables JSON
+     */
+    public function data()
+    {
+        //Make this method testable and mockable by using our injected $room member.
+        $rooms = $this->room->select(array('rooms.id',  'rooms.name', 'rooms.description', 'rooms.created_at'));
+
+        return Datatables::of($rooms)
+        // ->edit_column('created_at','{{{ Carbon::now()->diffForHumans(Carbon::createFromFormat(\'Y-m-d H\', $test)) }}}')
+
+        ->add_column('actions', '<div class="btn-group">
+                  <button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Action <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="{{{ URL::to(\'rooms/\' . $id ) }}}">{{{ Lang::get(\'button.show\') }}}</a></li>
+                    <li><a href="{{{ URL::to(\'rooms/\' . $id . \'/edit\' ) }}}">{{{ Lang::get(\'button.edit\') }}}</a></li>
+                    <li><a href="{{{ URL::to(\'rooms/\' . $id . \'/delete\' ) }}}">{{{ Lang::get(\'button.delete\') }}}</a></li>
+                  </ul>
+                </div>')
+
+        ->remove_column('id')
+
+        ->make();
+    }
+}

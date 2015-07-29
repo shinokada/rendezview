@@ -1,0 +1,393 @@
+@extends('layouts.master')
+
+@section('title')
+@parent
+:: Home
+@stop
+
+@section('content')
+
+<script type="text/javascript">
+$(function() {
+	var options = {
+		classes			: 'mm-light',
+		modal			: true
+	};
+
+	options.position = 'left';
+	options.zposition = 'next';
+	$('#tooltip-1').mmenu( options );
+
+	options.position = 'right';
+	options.zposition = 'next';
+	$('#tooltip-2').mmenu( options );
+
+	options.position = 'bottom';
+	options.zposition = 'front';
+	$('#popup-1').mmenu( options );
+
+	options.position = 'top';
+	options.zposition = 'front';
+	$('#popup-2').mmenu( options );
+
+	$('a.close').click(function() {
+		$(this).closest( '.mm-menu' ).trigger( 'close' );
+	});
+});
+</script>
+@if (Auth::check())
+<?php
+// try {
+// 	$db = new PDO('mysql:host=localhost;dbname=58', 'evan', '3v0lve2oo9!');
+// } catch(Exception $e) {
+// 	exit('Unable to connect to database.');
+// }
+// $pending = "SELECT * FROM rv_appts WHERE approval = 0 AND start > current_timestamp";
+// $pendingResult = $db->query($pending) or die(print_r($db->errorInfo()));
+// $pendingJson = json_encode($pendingResult->fetchAll(PDO::FETCH_ASSOC));
+// $pendingApprovalCount =  count($pendingArray = json_decode($pendingJson,true));
+
+// $user_id_find = Auth::user()->id;
+
+// $myMeetings = $db->prepare("SELECT rv_attendees.id, rv_appts.start AS 'appt_start', rv_appts.id AS 'appt_id', rv_users.id AS 'user_id', username, title, description, approval, room, rv_appts.updated_at AS 'last_update', rv_appts.status AS 'status' FROM rv_appts, rv_users, rv_attendees WHERE rv_users.id=rv_attendees.user_id AND rv_appts.id=rv_attendees.appt_id AND rv_users.id='$user_id_find' AND start > current_timestamp ORDER BY rv_appts.start ASC;");
+// $myMeetings->execute();
+// $myMeetingsCount = $myMeetings->rowCount();
+
+// $currentMeetings = $db->prepare("SELECT rv_attendees.id, rv_appts.start AS 'appt_start', rv_appts.end AS 'appt_end', rv_appts.id AS 'appt_id', rv_users.id AS 'user_id', username, title, description, approval, room, rv_appts.updated_at AS 'last_update', rv_appts.status AS 'status' FROM rv_appts, rv_users, rv_attendees WHERE rv_users.id=rv_attendees.user_id AND rv_appts.id=rv_attendees.appt_id AND rv_users.id='$user_id_find' AND start < current_timestamp AND end > current_timestamp ORDER BY rv_appts.start ASC;");
+// $currentMeetings->execute();
+// $currentMeetingsCount = $currentMeetings->rowCount();
+?>
+@if (Session::has('message'))
+<div class="alert alert-info">{{ Session::get('message') }}</div>
+@endif
+
+<!-- ADMIN -->
+@if (Auth::user()->hasRole('admin'))
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-user fa-fw"></i> Account Info
+					</div>
+					<div class="panel-body">
+						<div class="list-group">
+							<a href="#" class="list-group-item">
+								<i class="fa fa-book fa-fw"></i> Created: 
+							<script>
+							var time = moment("{{Auth::user()->created_at}}").fromNow();
+							document.write(time);
+							</script>
+							</a>
+							<a href="#" class="list-group-item">
+								<i class="fa fa-cog fa-fw"></i> Username: {{{ Auth::user()->username }}}
+							</a>
+						</div>
+					</div>
+					<!-- <div class="panel-footer">
+						Panel Footer
+					</div> -->
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-bell fa-fw"></i> Basic Settings
+					</div>
+					<div class="panel-body">
+						<div class="list-group">
+							<a href="#" class="list-group-item">
+								<i class="fa fa-book fa-fw"></i> Approvals Needed
+								<span class="pull-right text-muted small"><em>{{ $pendingApprovalCount }}</em>
+								</span>
+							</a>
+							<a href="#" class="list-group-item">
+								<i class="fa fa-cog fa-fw"></i> Current Role: System Administrator
+								<span class="pull-right text-muted small"><em></em>
+								</span>
+							</a>
+						</div>
+						<!-- <a href="#" class="btn btn-default btn-block">View All Alerts</a> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+		</div>
+	</div>
+</div>
+
+<div id="popup-2" class="tip">
+	<div>
+		<a href="#" class="close">x</a>
+		<h4>Popups and modal windows</h4>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@endif
+<!-- ATTENDEE -->
+@if (Confide::user()->hasRole('attendee'))
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-user fa-fw"></i> Account Info
+					</div>
+					<div class="panel-body">
+						<div class="list-group">
+							<a href="#" class="list-group-item">
+								<i class="fa fa-book fa-fw"></i> Created: 
+							<script>
+							var time = moment("{{Auth::user()->created_at}}").fromNow();
+							document.write(time);
+							</script>
+							</a>
+							<a href="#" class="list-group-item">
+								<i class="fa fa-cog fa-fw"></i> Username: {{{ Auth::user()->username }}}
+							</a>
+						</div>
+					</div>
+					<!-- <div class="panel-footer">
+						Panel Footer
+					</div> -->
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-bell fa-fw"></i> Basic Settings
+					</div>
+					<div class="panel-body">
+						<div class="list-group">
+							<!-- <a href="#" class="list-group-item">
+								<i class="fa fa-book fa-fw"></i> Number of Events
+								<span class="pull-right text-muted small"><em></em>
+								</span>
+							</a> -->
+							<a href="#" class="list-group-item">
+								<i class="fa fa-cog fa-fw"></i> Current Role: Attendee
+								<span class="pull-right text-muted small"><em></em>
+								</span>
+							</a>
+						</div>
+						<!-- <a href="#" class="btn btn-default btn-block">View All Alerts</a> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+		</div>
+	</div>
+</div>
+
+@endif
+<!-- ORGANIZER -->
+@if (Auth::user()->hasRole('organizer'))
+
+<div class="jumbotron hero-spacer">
+	<h1>Hello {{{ Auth::user()->username }}}</h1>
+	<p>This page is only visable to organizers.</p>
+</div>
+
+@endif
+<!-- ROOM ADMIN -->
+@if (Auth::user()->hasRole('r-admin'))
+
+<div class="jumbotron hero-spacer">
+	<h1>Hello {{{ Auth::user()->username }}}</h1>
+	<p>This page is only visable to room administrators.</p>
+</div>
+
+@endif
+<!-- TERMINAL -->
+@if (Auth::user()->hasRole('terminal'))
+
+<div class="jumbotron hero-spacer">
+	<h1>Hello Terminal!</h1>
+	<p>This page is only visable to a terminal.</p>
+</div>
+
+@endif
+<!-- GUEST -->
+@else
+
+<div class="jumbotron hero-spacer">
+	<h1>Welcome to RendezView!</h1>
+</div>
+
+@endif
+
+<!-- <h1 class="page-header" id='clock'></h1> -->
+@if (Auth::check())
+<!-- CURRENTLY HAPPENING -->
+<h3>Currently Happening</h3>
+@if ($currentMeetingsCount === 1)
+@elseif ($currentMeetingsCount > 1)
+@else
+<div class="row">
+	<div class="col-md-12">
+		<div class="alert alert-info alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			You're scot-free!
+		</div>
+	</div>
+</div>
+@endif
+
+@if ($currentMeetings === 0)
+@else
+<ul class="timeline">
+	<?php $i = 0; ?>
+	@foreach($currentMeetings as $value)
+		@if ($value->approval==0)
+		<li class="timeline-inverted">
+		<div class="timeline-badge warning"><i class="fa fa-question fa-fw"></i></div>
+		@else
+		<li>
+		<div class="timeline-badge info"><i class="fa fa-bell fa-fw"></i></div>
+		@endif
+		<div class="timeline-panel">
+			<div class="timeline-heading">
+				<!-- <a href="//on.evan.so/design/public/appts/{{ $value->appt_id }}/edit"> -->
+				<a class="roomhref" href="{{{ URL::to('rooms/'.$value->room) }}} " data-time="{{{ $value->appt_start }}}">
+					@if ($value->approval==0)
+					<h4 class="timeline-title">{{{ $value->title }}} <small><em>Pending Approval</em></small></h4>
+					@else
+					<h4 class="timeline-title">{{ $value->title }} </small></h4>
+					@endif
+				</a>
+			</div>
+			<div class="timeline-body">
+				<p>
+					@if ($value->status != null)
+					<strong>{{{ $value->status }}}</strong>
+					@endif
+				</p>
+				<p>{{{ $value->description }}}</p>
+				<p>
+					<small class="text-muted"><i class="glyphicon glyphicon-time"></i> Ending
+						<script type="text/javascript">
+						var time = moment("{{ $value->appt_end }}").fromNow();
+						document.write(time);
+						</script>
+					</small>
+				</p>
+			</div>
+			<a href="edithref" class="fa fa-edit fa-fw fa-2x edit-btn" data-apptID="{{ $value->appt_id }}" title="Edit Meeting"><div class="hide-text">Edit Meeting</div></a>
+			<!-- <div class="edit-btn" style="display: block; background: red; width: 50px; height: 50px;"></div> -->
+		</div>
+	</li>
+	<?php $i++; ?>
+	@endforeach
+</ul>
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
+
+@endif
+
+@endif
+
+
+@if (Auth::check())
+<!-- UPCOMING APPOINTMENTS -->
+<h3>Upcoming Meetings</h3>
+@if ($myMeetingsCount === 1)
+@elseif ($myMeetingsCount > 1)
+@else
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="alert alert-info alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			You have no plans!  Why don't you make some?
+		</div>
+	</div>
+</div>
+
+@endif
+
+@if ($myMeetings === 0)
+<div class="create-meeting">
+	<button class="action-btn create-meeting-btn btn">Create New Meeting</button>
+</div>
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
+@else
+<ul class="timeline">
+	<?php $i = 0; ?>
+	@foreach($myMeetings as $value)
+		@if ($value->approval==0)
+		<li class="timeline-inverted">
+		<div class="timeline-badge warning"><i class="fa fa-question fa-fw"></i></div>
+		@else
+		<li>
+		<div class="timeline-badge info"><i class="fa fa-bell fa-fw"></i></div>
+		@endif
+		<div class="timeline-panel">
+			<div class="timeline-heading">
+				<!-- <a href="//on.evan.so/design/public/appts/{{ $value->appt_id }}/edit"> -->
+				<a class="roomhref" href="{{{ URL::to('rooms/$value->room) }}} " data-time="{{{ $value->appt_start }}}">
+					@if ($value["approval"]==0)
+					<h4 class="timeline-title">{{{ $value->title }}} <small><em>Pending Approval</em></small></h4>
+					@else
+					<h4 class="timeline-title">{{ $value->title }} </small></h4>
+					@endif
+				</a>
+			</div>
+			<div class="timeline-body">
+				<p>
+					@if ($value->status != null)
+					<strong>{{{ $value->status }}}</strong>
+					@endif
+				</p>
+				<p>{{{ $value->description }}}</p>
+				<p>
+					<small class="text-muted"><i class="glyphicon glyphicon-time"></i> Starting 
+						<script type="text/javascript">
+						var time = moment("{{ $value->appt_start }}").fromNow();
+						document.write(time);
+						</script>
+					</small>
+				</p>
+			</div>
+			<a href="edithref" class="fa fa-edit fa-fw fa-2x edit-btn" data-apptID="{{ $value->appt_id }}" title="Edit Meeting"><div class="hide-text">Edit Meeting</div></a>
+			<!-- <div class="edit-btn" style="display: block; background: red; width: 50px; height: 50px;"></div> -->
+		</div>
+	</li>
+	<?php $i++; ?>
+	@endforeach
+</ul>
+<div class="create-meeting">
+	<button class="action-btn create-meeting-btn btn">Create New Meeting</button>
+</div>
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
+
+@endif
+
+@endif
+
+@stop

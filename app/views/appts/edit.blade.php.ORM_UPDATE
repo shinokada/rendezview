@@ -1,0 +1,323 @@
+@extends('layouts.modal')
+
+{{-- Web site Title --}}
+@section('title')
+{{{ Lang::get('Edit Appts') }}} ::
+@parent
+@stop
+
+{{-- Content --}}
+@section('content')
+
+{{{$conflictTotal}}}
+
+@if (Auth::check())
+
+<!-- NORMAL APPOINTMENT VIEW -->
+
+@if ($appt->created_by != Confide::user()->username)
+@if (Auth::user()->hasRole('admin'))
+@else
+
+<div class="row">
+	<div id="render" class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+		<div class="modal-header">
+			<button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+			<h4 class="modal-title">Viewing {{{ $appt->title }}}</h4>
+		</div><!-- end modal-header -->
+		<div class="modal-body">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<i class="fa fa-bell fa-fw"></i> Appointment Information
+				</div>
+				<div class="panel-body">
+					<div class="list-group">
+						<a href="#" class="list-group-item">
+							<i class="fa fa-user fa-fw"></i> Organizer: {{{ $appt->created_by }}}
+						</a>
+						@if ($appt->status != null)
+						<a href="#" class="list-group-item">
+							<i class="fa fa-comment fa-fw"></i> Status: {{{ $appt->status }}}
+						</a>
+						@endif
+					</div>
+					<!-- <a href="#" class="btn btn-default btn-block">View All Alerts</a> -->
+				</div>
+				<div class="panel-footer">
+				</div>
+			</div>
+			<div class="panel panel-default recipients">
+				<div class="panel-heading">
+					@if ($getAttendeesCount === 1)
+					<i class="fa fa-user"></i> Current Attendee
+					@elseif ($getAttendeesCount > 1)
+					<i class="fa fa-users"></i> Current Attendees
+					@else
+					@endif
+				</div>
+				<div class="panel-body">
+					@foreach($getAttendees as $getAttendee)
+					<div class="recipient" title="{{ $getAttendee->username }}
+						{{ $getAttendee->email }}">
+						{{ $getAttendee->username }}
+						<div class="email">
+							{{ $getAttendee->email }}
+						</div>
+					</div>
+					@endforeach
+					<div class="clearfix"></div>
+				</div>
+				<div class="panel-footer">
+					@if ($getAttendeesCount === 1)
+					<span class="text-muted">{{ $getAttendeesCount }} guest attending</span>
+					@elseif ($getAttendeesCount > 1)
+					<span class="text-muted">{{ $getAttendeesCount }} guests attending</span>
+					@else
+					@endif
+				</div>
+			</div>
+			<p>
+				@if ($attend == 0)
+
+				@if ($conflictTotal > 0)
+				<div class="alert alert-block alert-danger fade in">
+					<a class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
+					<h4>You Cannot Join Meeting</h4>
+					You already have something scheduled during this time!
+				</div>
+
+				@else
+				{{ Form::open(array('action' => 'ApptController@join', 'hello')) }}
+				{{ Form::hidden('appt_id', $appt->id) }}
+				{{ Form::hidden('user_id', Confide::user()->id) }}
+				{{ Form::submit('Join This Meeting', array('class' => 'btn btn-primary btn-block btn-lg')) }}
+				{{ Form::close() }}
+				@endif
+
+				@else
+				{{ Form::open(array('action' => 'ApptController@leave', 'hello')) }}
+				{{ Form::hidden('appt_id', $appt->id) }}
+				{{ Form::hidden('user_id', Confide::user()->id) }}
+				{{ Form::submit('Leave This Meeting', array('class' => 'btn btn-primary btn-block btn-lg')) }}
+				{{ Form::close() }}
+				@endif
+			</p>
+		</div>
+		<div class="modal-footer">
+			<div class="row">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+
+	{{ Form::close() }}
+
+	@endif
+	@endif
+
+	<!-- APPOINTMENT OWNER VIEW -->
+
+	@if ($appt->created_by === Confide::user()->username OR Auth::user()->hasRole('admin'))
+
+	<?php
+	$appt_id=$appt->id;
+	$user_id_find = Auth::user()->id;
+	// try {
+	// 	$db = new PDO('mysql:host=localhost;dbname=sullivi2_rendezview', 'sullivi2_evan', '3v0lve2oo9!');
+	// } catch(Exception $e) {
+	// 	exit('Unable to connect to database.');
+	// }
+// Attendee List
+	// $getAttendees = $db->prepare("SELECT rv_attendees.id AS 'attendees_id', rv_appts.start AS 'appt_start', rv_appts.id AS 'appt_id', rv_users.id AS 'user_id', username, email, title, description FROM rv_appts, rv_users, rv_attendees WHERE rv_users.id=rv_attendees.user_id AND rv_appts.id=rv_attendees.appt_id AND rv_appts.id='$appt_id' ORDER BY rv_attendees.id ASC;");
+	// $getAttendees->execute();
+	// $getAttendeesCount = $getAttendees->rowCount();
+
+//DelegateID
+	// $getDelegateID = $db->prepare("SELECT rv_attendees.id AS 'attendees_id', rv_attendees.user_id AS 'attendees_user_id', rv_appts.start AS 'appt_start', rv_appts.id AS 'appt_id', rv_users.id 'user_id', username, email, title, description FROM rv_appts, rv_users, rv_attendees WHERE rv_users.id=rv_attendees.user_id AND rv_appts.id=rv_attendees.appt_id AND rv_appts.id='$appt_id' ORDER BY rv_attendees.id DESC;");
+	// $getDelegateID->execute();
+
+
+	// $mysqli = new mysqli("localhost", "sullivi2_evan", "3v0lve2oo9!", "sullivi2_rendezview");
+	// if (mysqli_connect_errno()) {
+	// 	printf("Connect failed: %s\n", mysqli_connect_error());
+	// 	exit();
+	// }
+	// $conflictCounter = "SELECT COUNT(*) FROM rv_attendees, rv_users, rv_appts WHERE rv_attendees.user_id = rv_users.id AND rv_attendees.appt_id = rv_appts.id AND rv_users.id='$user_id_find' AND start < '$appt->end' AND end > '$appt->start';";
+	// $conflictCounterQuery = mysqli_query($mysqli, $conflictCounter) or die (mysqli_error());
+	// $conflictTotal = mysqli_fetch_row($conflictCounterQuery);
+	?>
+
+	<div class="row">
+		<div id="render" class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+			<div class="modal-header">
+				<button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+				<h4 class="modal-title">Edit {{ $appt->title }} <small>@if (Auth::user()->hasRole('admin')) Admin Mode @endif</small></h4>
+			</div><!-- end modal-header -->
+			<div class="modal-body">
+				{{ HTML::ul($errors->all()) }}
+				{{ Form::model($appt, array('route' => array('appts.update', $appt->id), 'method' => 'PUT')) }}
+				<div class="form-group">
+					{{ Form::label('title', 'Appointment Title') }}
+					{{ Form::text('title', null, array('class' => 'form-control input-lg')) }}
+				</div>
+				<div class="form-group">
+					{{ Form::label('status', 'Status') }}
+					{{ Form::text('status', null, array('class' => 'form-control input-lg')) }}
+				</div>
+				<div class="form-group">
+					{{ Form::label('description', 'Description') }}
+					{{ Form::textarea('description', null, ['class' => 'form-control']) }}
+				</div>
+				@if (Auth::user()->hasRole('admin'))
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<div class="form-group">
+							{{ Form::label('start', 'Start') }}
+							{{ Form::text('start', null, array('class' => 'form-control input-lg')) }}
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<div class="form-group">
+							{{ Form::label('end', 'End') }}
+							{{ Form::text('end', null, array('class' => 'form-control input-lg')) }}
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="approval">Approval?</label>
+					<select class="form-control" name="approval" id="approval">
+						<option value="1"{{{ ($appt->approval ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.yes') }}}</option>
+						<option value="0"{{{ ( ! $appt->approval ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.no') }}}</option>
+					</select>
+				</div>
+				@else
+				{{ Form::hidden('end', null, array('class' => 'form-control input-lg')) }}
+				{{ Form::hidden('start', null, array('class' => 'form-control input-lg')) }}
+				@endif
+				<hr>
+				<p>
+					{{ Form::submit('Submit Changes', array('class' => 'btn btn-primary btn-block btn-lg')) }}
+					{{ Form::close() }}
+				</p>
+				<div class="message">
+					<div class="alert-message alert-message-warning">
+						<h4>Warning</h4>
+						<p>Are you sure you want to delete {{ $appt->title }}?</p>
+					</div>
+				</div>
+				<p>
+					{{ Form::open(array('url' => 'appts/' . $appt->id)) }}
+					{{ Form::hidden('_method', 'DELETE') }}
+					{{ Form::submit('Delete', array('class' => 'delete-appt btn btn-danger btn-block btn-lg')) }}
+					{{ Form::close() }}
+				</p>
+				<div class="panel panel-default recipients">
+					<div class="panel-heading">
+						@if ($getAttendeesCount === 1)
+						<i class="fa fa-user"></i> Current Attendee
+						@elseif ($getAttendeesCount > 1)
+						<i class="fa fa-users"></i> Current Attendees
+						@else
+						@endif
+					</div>
+					<div class="panel-body">
+						@foreach($getAttendees as $attendee)
+						<div class="recipient" title="{{ $attendee->username }}
+						{{ $attendee->email }}">
+						{{ $attendee->username }}
+						<div class="email">
+							{{ $attendee->email }}
+						</div>
+					</div>
+					@endforeach
+					<div class="clearfix"></div>
+				</div>
+				<div class="panel-footer">
+					@if ($getAttendeesCount === 1)
+					<span class="text-muted">{{ $getAttendeesCount }} guest attending</span>
+					@elseif ($getAttendeesCount > 1)
+					<span class="text-muted">{{ $getAttendeesCount }} guests attending</span>
+					@else
+					@endif
+				</div>
+			</div>
+			<!-- DELEGATION -->
+			@if ($getAttendeesCount === 1)
+			@else
+			<p>
+				{{ Form::open(array('action' => 'ApptController@delegate', 'hello')) }}
+				{{ Form::hidden('appt_id', $appt->id) }}
+				<div class="form-group">
+					<label class="control-label" for="delegate">Delegate Meeting Ownership To:</label>
+					<select class="form-control" name="delegate" id="delegate">
+						@foreach($getDelegateID as $delegate)
+						<option value="{{{ $delegate->username }}}|{{{ $delegate->attendees_user_id }}}">{{{ Lang::get($delegate->username) }}}</option>
+						@endforeach
+					</select>
+				</div>
+				{{ Form::submit('Transfer Meeting Ownership', array('class' => 'btn btn-primary btn-block btn-lg')) }}
+				{{ Form::close() }}
+			</p>
+			@endif
+			<p>
+				@if ($appt->created_by != Confide::user()->username)
+				<?php 
+				if($attend==0)
+				{
+					if($conflictTotal[0]!=0)
+					{
+						?>
+						<div class="alert alert-block alert-danger fade in">
+							<a class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
+							<h4>You Cannot Join Meeting</h4>
+							You already have something scheduled during this time!
+						</div>
+						<?php
+					}
+					else
+					{
+						?>
+						{{ Form::open(array('action' => 'ApptController@join', 'hello')) }}
+						{{ Form::hidden('appt_id', $appt->id) }}
+						{{ Form::hidden('user_id', Confide::user()->id) }}
+						{{ Form::submit('Join This Meeting', array('class' => 'btn btn-primary btn-block btn-lg')) }}
+						{{ Form::close() }}
+						<?php
+					}
+				}
+				else
+				{
+					?>
+					{{ Form::open(array('action' => 'ApptController@leave', 'hello')) }}
+					{{ Form::hidden('appt_id', $appt->id) }}
+					{{ Form::hidden('user_id', Confide::user()->id) }}
+					{{ Form::submit('Leave This Meeting', array('class' => 'btn btn-primary btn-block btn-lg')) }}
+					{{ Form::close() }}
+					<?php 
+				}
+				?>
+				@endif
+			</p>
+		</div> <!-- end modal-body -->
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+	</div>
+
+	{{ Form::close() }}
+
+	@endif
+
+	@endif
+	<script>
+// $('#basicExample .time').timepicker({
+// 	'showDuration': true,
+// 	'timeFormat': 'g:ia'
+// });
+
+// $('#basicExample .date').datepicker({
+// 	'format': 'm/d/yyyy',
+// 	'autoclose': true
+// });
+// </script>
+@stop
