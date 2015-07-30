@@ -98,13 +98,6 @@ public function userList(){
 	// // Query that retrieves events
 	// $query = "SELECT id, title, start, end, description FROM rv_appts WHERE room = $id AND approval = 1 ORDER BY id";
 
-	// // connection to the database
-	// try {
-	// 	$db = new PDO('mysql:host=localhost;dbname=sullivi2_rendezview', 'sullivi2_evan', '3v0lve2oo9!');
-	// } catch(Exception $e) {
-	// 	exit('Unable to connect to database. CalendarController@approved');
-	// }
-
 	// // Execute the query
 	// $result = $db->query($query) or die(print_r($db->errorInfo()));
 
@@ -124,11 +117,6 @@ public function userList(){
 	->where('end', '>', '2014-05-23 10:00:00')
 	->count();
 
-	// try {
-	// 	$db = new PDO('mysql:host=localhost;dbname=sullivi2_rendezview', 'sullivi2_evan', '3v0lve2oo9!');
-	// } catch(Exception $e) {
-	// 	exit('Unable to connect to database. edit.blade');
-	// }
 	// // Attendee List
 	// $getAttendees = $db->prepare("SELECT
 	// 	rv_attendees.id AS 'attendees_id',
@@ -173,15 +161,8 @@ public function userList(){
 	// $conflictCounterQuery = mysqli_query($mysqli, $conflictCounter) or die (mysqli_error());
 	// $conflictTotal = mysqli_fetch_row($conflictCounterQuery);
 
-
 	// $appt_id=$appt->id;
 	// $user_id_find = Auth::user()->id;
-	// try {
-	// 	$db = new PDO('mysql:host=localhost;dbname=sullivi2_rendezview', 'sullivi2_evan', '3v0lve2oo9!');
-	// } catch(Exception $e) {
-	// 	exit('Unable to connect to database.');
-	// }
-
 
 	// $getDelegateID = $db->prepare(
 	// 	"SELECT rv_attendees.id AS 'attendees_id',

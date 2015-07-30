@@ -113,8 +113,8 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('cal/pending/{id}', 'CalendarController@pending');
 	Route::get('cal/add', 'CalendarController@add_event');
 	Route::get('cal/update', 'CalendarController@update_event');
-	Route::post('appointment/finder', 'ApptController@appointmentFinder');
-	Route::get('appointment/finder', 'ApptController@appointmentFinder');
+	// Route::post('appointment/finder', 'ApptController@appointmentFinder');
+	// Route::get('appointment/finder', 'ApptController@appointmentFinder');
 	// Route::get('attendee/add', 'ApptController@join');
 	Route::post('attendee/add', 'ApptController@join');
 	Route::post('attendee/remove', 'ApptController@leave');

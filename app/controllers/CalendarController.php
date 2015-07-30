@@ -20,17 +20,10 @@ class CalendarController extends BaseController {
 	{
 		//  // List of events
 		// $json = array();
-		
+
 		// // Query that retrieves events
 		// $query = "SELECT id, title, start, end, description FROM rv_appts WHERE room = $id AND approval = 1 ORDER BY id";
 
-		// // connection to the database
-		// try {
-		// 	$db = new PDO('mysql:host=localhost;dbname=sullivi2_rendezview', 'sullivi2_evan', '3v0lve2oo9!');
-		// } catch(Exception $e) {
-		// 	exit('Unable to connect to database. CalendarController@approved');
-		// }
-		
 		// // Execute the query
 		// $result = $db->query($query) or die(print_r($db->errorInfo()));
 
@@ -48,17 +41,10 @@ class CalendarController extends BaseController {
 	{
 		//  // List of events
 		// $json = array();
-		
+
 		// // Query that retrieves events
 		// $query = "SELECT id, title, start, end, description FROM rv_appts WHERE room = $id AND approval = 0 ORDER BY id";
 
-		// // connection to the database
-		// try {
-		// 	$db = new PDO('mysql:host=localhost;dbname=sullivi2_rendezview', 'sullivi2_evan', '3v0lve2oo9!');
-		// } catch(Exception $e) {
-		// 	exit('Unable to connect to database. CalendarController@pending');
-		// }
-		
 		// // Execute the query
 		// $result = $db->query($query) or die(print_r($db->errorInfo()));
 
@@ -111,11 +97,6 @@ class CalendarController extends BaseController {
 			}
 			else
 			{
-				// $mysqli = new mysqli("localhost", "sullivi2_evan", "3v0lve2oo9!", "sullivi2_rendezview");
-				// if (mysqli_connect_errno()) {
-				// 	printf("CalendarController@add_event: Connect failed: %s\n", mysqli_connect_error());
-				// 	exit();
-				// }
 				// $sqlCommand = "SELECT COUNT(*) FROM rv_appts WHERE room=$room_id AND start < '$end' AND end > '$start'";
 				// $query = mysqli_query($mysqli, $sqlCommand) or die (mysqli_error());
 				// $row = mysqli_fetch_row($query);
@@ -150,11 +131,6 @@ class CalendarController extends BaseController {
 					}
 					else
 					{
-						// try {
-						// 	$db = new PDO('mysql:host=localhost;dbname=sullivi2_rendezview', 'sullivi2_evan', '3v0lve2oo9!');
-						// } catch(Exception $e) {
-						// 	exit('Unable to connect to database. CalendarController@add_event');
-						// }
 						// $sql = "INSERT INTO rv_appts (title, start, end, room, user_id, created_by, updated_by) VALUES (:title, :start, :end, :room, :user_id, :created_by, :updated_by)";
 						// $q = $db->prepare($sql);
 						// $q->execute(array(':title'=>$title, ':start'=>$start, ':end'=>$end, ':room' => $room_id, ':user_id' => $user_id, ':created_by' => $created_by, ':updated_by' => $updated_by));
@@ -204,7 +180,7 @@ class CalendarController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	
+
 
 	public function update_event()
 	{
@@ -215,13 +191,6 @@ class CalendarController extends BaseController {
 			$title = Input::get('title');
 			$start = Input::get('start');
 			$end = Input::get('end');
-
-			// // connection to the database
-			// try {
-			// 	$db = new PDO('mysql:host=localhost;dbname=sullivi2_rendezview', 'sullivi2_evan', '3v0lve2oo9!');
-			// } catch(Exception $e) {
-			// 	exit('Unable to connect to database. CalendarController@update_event');
-			// }
 
 			// // update the records
 			// $sql = "UPDATE rv_events SET title=?, start=?, end=? WHERE id=?";
@@ -234,28 +203,21 @@ class CalendarController extends BaseController {
 		}
 	}
 
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function delete()
-	{
-		if(Request::ajax())
-		{
-			$id = Input::get('id');
-			// connection to the database
-			try {
-				$db = new PDO('mysql:host=localhost;dbname=sullivi2_rendezview', 'sullivi2_evan', '3v0lve2oo9!');
-			} catch(Exception $e) {
-				exit('Unable to connect to database. CalendarController@delete');
-			}
-			$sql = "DELETE from rv_events WHERE id=".$id;
-			$q = $db->prepare($sql);
-			$q->execute();
-		}
-	}
+	//
+	// /**
+	//  * Remove the specified resource from storage.
+	//  *
+	//  * @param  int  $id
+	//  * @return Response
+	//  */
+	// public function delete()
+	// {
+	// 	if(Request::ajax())
+	// 	{
+	// 		$id = Input::get('id');
+	// 		$sql = "DELETE from rv_events WHERE id=".$id;
+	// 		$q = $db->prepare($sql);
+	// 		$q->execute();
+	// 	}
+	// }
 }
-

@@ -54,14 +54,14 @@ $(function() {
 					<div class="panel-body">
 						<div class="list-group">
 							<a href="#" class="list-group-item">
-								<i class="fa fa-book fa-fw"></i> Created: 
+								<i class="fa fa-book fa-fw"></i> Created:
 							<script>
-							var time = moment("{{Auth::user()->created_at}}").fromNow();
+							var time = moment("{{--Auth::user()->created_at--}}").fromNow();
 							document.write(time);
 							</script>
 							</a>
 							<a href="#" class="list-group-item">
-								<i class="fa fa-cog fa-fw"></i> Username: {{{ Auth::user()->username }}}
+								<i class="fa fa-cog fa-fw"></i> Username: {{-- Auth::user()->username --}}
 							</a>
 						</div>
 					</div>
@@ -76,7 +76,7 @@ $(function() {
 						<div class="list-group">
 							<a href="#" class="list-group-item">
 								<i class="fa fa-book fa-fw"></i> Approvals Needed
-								<span class="pull-right text-muted small"><em>{{ $pendingApprovalCount }}</em>
+								<span class="pull-right text-muted small"><em>{{-- $pendingApprovalCount --}}</em>
 								</span>
 							</a>
 							<a href="#" class="list-group-item">
@@ -122,14 +122,14 @@ $(function() {
 					<div class="panel-body">
 						<div class="list-group">
 							<a href="#" class="list-group-item">
-								<i class="fa fa-book fa-fw"></i> Created: 
+								<i class="fa fa-book fa-fw"></i> Created:
 							<script>
-							var time = moment("{{Auth::user()->created_at}}").fromNow();
+							var time = moment("{{--Auth::user()->created_at--}}").fromNow();
 							document.write(time);
 							</script>
 							</a>
 							<a href="#" class="list-group-item">
-								<i class="fa fa-cog fa-fw"></i> Username: {{{ Auth::user()->username }}}
+								<i class="fa fa-cog fa-fw"></i> Username: {{-- Auth::user()->username --}}
 							</a>
 						</div>
 					</div>
@@ -235,7 +235,7 @@ $(function() {
 						{{{ $value->room_name }}}</p>
 					</small>
 				<p>
-					<small class="text-muted"><i class="fa fa-clock-o fa-fw"></i> Ending 
+					<small class="text-muted"><i class="fa fa-clock-o fa-fw"></i> Ending
 						<script type="text/javascript">
 						var time = moment("{{ $value->appt_end }}").fromNow();
 						document.write(time);
@@ -324,7 +324,7 @@ $(function() {
 						{{{ $value->room_name }}}</p>
 					</small>
 				<p>
-					<small class="text-muted"><i class="fa fa-clock-o fa-fw"></i> Starting 
+					<small class="text-muted"><i class="fa fa-clock-o fa-fw"></i> Starting
 						<script type="text/javascript">
 						var time = moment("{{ $value->appt_start }}").fromNow();
 						document.write(time);
@@ -394,7 +394,7 @@ $(function() {
 						{{{ $value->room_name }}}</p>
 					</small>
 				<p>
-					<small class="text-muted"><i class="fa fa-clock-o fa-fw"></i> Starting 
+					<small class="text-muted"><i class="fa fa-clock-o fa-fw"></i> Starting
 						<script type="text/javascript">
 						var time = moment("{{ $value->start }}").fromNow();
 						document.write(time);
@@ -422,7 +422,7 @@ $(function() {
     $('#clock').html(time);
     setTimeout(displayTime, 1000);
 }
- 
+
 $(document).ready(function() {
     displayTime();
 });

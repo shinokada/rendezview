@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://drexel.evan.so',
+	'url' => 'http://projects.ehumps.me',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -183,8 +183,8 @@ return array(
 		'Confide'         => 'Zizaco\Confide\ConfideFacade',
 		'Entrust'         => 'Zizaco\Entrust\EntrustFacade',
 		'Datatables'      => 'Bllim\Datatables\Datatables',
-		'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade',
-		'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+		'Datatable' 	  => 'Chumper\Datatable\Facades\DatatableFacade',
+		'Excel' 		  => 'Maatwebsite\Excel\Facades\Excel',
 		'BrainSocket'     => 'BrainSocket\BrainSocketFacade',
 
 	),

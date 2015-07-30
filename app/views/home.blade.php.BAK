@@ -37,11 +37,7 @@ $(function() {
 </script>
 @if (Auth::check())
 <?php
-// try {
-// 	$db = new PDO('mysql:host=localhost;dbname=58', 'evan', '3v0lve2oo9!');
-// } catch(Exception $e) {
-// 	exit('Unable to connect to database.');
-// }
+
 // $pending = "SELECT * FROM rv_appts WHERE approval = 0 AND start > current_timestamp";
 // $pendingResult = $db->query($pending) or die(print_r($db->errorInfo()));
 // $pendingJson = json_encode($pendingResult->fetchAll(PDO::FETCH_ASSOC));
@@ -75,7 +71,7 @@ $(function() {
 					<div class="panel-body">
 						<div class="list-group">
 							<a href="#" class="list-group-item">
-								<i class="fa fa-book fa-fw"></i> Created: 
+								<i class="fa fa-book fa-fw"></i> Created:
 							<script>
 							var time = moment("{{Auth::user()->created_at}}").fromNow();
 							document.write(time);
@@ -147,7 +143,7 @@ $(function() {
 					<div class="panel-body">
 						<div class="list-group">
 							<a href="#" class="list-group-item">
-								<i class="fa fa-book fa-fw"></i> Created: 
+								<i class="fa fa-book fa-fw"></i> Created:
 							<script>
 							var time = moment("{{Auth::user()->created_at}}").fromNow();
 							document.write(time);
@@ -361,7 +357,7 @@ $(function() {
 				</p>
 				<p>{{{ $value->description }}}</p>
 				<p>
-					<small class="text-muted"><i class="glyphicon glyphicon-time"></i> Starting 
+					<small class="text-muted"><i class="glyphicon glyphicon-time"></i> Starting
 						<script type="text/javascript">
 						var time = moment("{{ $value->appt_start }}").fromNow();
 						document.write(time);

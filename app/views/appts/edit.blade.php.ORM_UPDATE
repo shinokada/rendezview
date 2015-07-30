@@ -122,11 +122,6 @@
 	<?php
 	$appt_id=$appt->id;
 	$user_id_find = Auth::user()->id;
-	// try {
-	// 	$db = new PDO('mysql:host=localhost;dbname=sullivi2_rendezview', 'sullivi2_evan', '3v0lve2oo9!');
-	// } catch(Exception $e) {
-	// 	exit('Unable to connect to database.');
-	// }
 // Attendee List
 	// $getAttendees = $db->prepare("SELECT rv_attendees.id AS 'attendees_id', rv_appts.start AS 'appt_start', rv_appts.id AS 'appt_id', rv_users.id AS 'user_id', username, email, title, description FROM rv_appts, rv_users, rv_attendees WHERE rv_users.id=rv_attendees.user_id AND rv_appts.id=rv_attendees.appt_id AND rv_appts.id='$appt_id' ORDER BY rv_attendees.id ASC;");
 	// $getAttendees->execute();
@@ -136,12 +131,6 @@
 	// $getDelegateID = $db->prepare("SELECT rv_attendees.id AS 'attendees_id', rv_attendees.user_id AS 'attendees_user_id', rv_appts.start AS 'appt_start', rv_appts.id AS 'appt_id', rv_users.id 'user_id', username, email, title, description FROM rv_appts, rv_users, rv_attendees WHERE rv_users.id=rv_attendees.user_id AND rv_appts.id=rv_attendees.appt_id AND rv_appts.id='$appt_id' ORDER BY rv_attendees.id DESC;");
 	// $getDelegateID->execute();
 
-
-	// $mysqli = new mysqli("localhost", "sullivi2_evan", "3v0lve2oo9!", "sullivi2_rendezview");
-	// if (mysqli_connect_errno()) {
-	// 	printf("Connect failed: %s\n", mysqli_connect_error());
-	// 	exit();
-	// }
 	// $conflictCounter = "SELECT COUNT(*) FROM rv_attendees, rv_users, rv_appts WHERE rv_attendees.user_id = rv_users.id AND rv_attendees.appt_id = rv_appts.id AND rv_users.id='$user_id_find' AND start < '$appt->end' AND end > '$appt->start';";
 	// $conflictCounterQuery = mysqli_query($mysqli, $conflictCounter) or die (mysqli_error());
 	// $conflictTotal = mysqli_fetch_row($conflictCounterQuery);
@@ -261,7 +250,7 @@
 			@endif
 			<p>
 				@if ($appt->created_by != Confide::user()->username)
-				<?php 
+				<?php
 				if($attend==0)
 				{
 					if($conflictTotal[0]!=0)
@@ -293,7 +282,7 @@
 					{{ Form::hidden('user_id', Confide::user()->id) }}
 					{{ Form::submit('Leave This Meeting', array('class' => 'btn btn-primary btn-block btn-lg')) }}
 					{{ Form::close() }}
-					<?php 
+					<?php
 				}
 				?>
 				@endif

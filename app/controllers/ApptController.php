@@ -114,11 +114,7 @@ class ApptController extends \BaseController {
 		$appt = Appt::find($id);
 		$appt_id=Appt::find($id);
 		$user_id=Confide::user()->id;
-		// $mysqli = new mysqli("localhost", "sullivi2_evan", "3v0lve2oo9!", "sullivi2_rendezview");
-		// if (mysqli_connect_errno()) {
-		// 	printf("Connect failed: %s\n", mysqli_connect_error());
-		// 	exit();
-		// }
+
 		// $sqlCommand = "SELECT count(*) FROM rv_attendees WHERE appt_id = $appt_id AND user_id = $user_id";
 		// $query = mysqli_query($mysqli, $sqlCommand) or die (mysqli_error());
 		// $row = mysqli_fetch_row($query);
@@ -164,7 +160,7 @@ class ApptController extends \BaseController {
 		->count();
 
 		// $getDelegateID = $db->prepare(
-		// 	"SELECT rv_attendees.id AS 'attendees_id', 
+		// 	"SELECT rv_attendees.id AS 'attendees_id',
 		// 	rv_attendees.user_id AS 'attendees_user_id', rv_appts.start AS 'appt_start', rv_appts.id AS 'appt_id', rv_users.id AS 'user_id', username, email, title, description FROM rv_appts, rv_users, rv_attendees WHERE rv_users.id=rv_attendees.user_id AND rv_appts.id=rv_attendees.appt_id AND rv_appts.id='$appt_id' ORDER BY rv_attendees.id DESC;");
 
 		$getDelegateID = DB::table('attendees')
@@ -236,12 +232,6 @@ class ApptController extends \BaseController {
 		$appt_id = Input::get('appt_id');
 		$user_id = Input::get('user_id');
 
-		// try {
-		// 	$db = new PDO('mysql:host=localhost;dbname=sullivi2_rendezview', 'sullivi2_evan', '3v0lve2oo9!');
-		// } catch(Exception $e) {
-		// 	exit('Unable to connect to database. ApptController@join');
-		// }
-
 		// $sql = "INSERT INTO rv_attendees (appt_id, user_id) VALUES (:appt_id, :user_id)";
 		// $q = $db->prepare($sql);
 		// $q->execute(array(':appt_id'=>$appt_id, ':user_id'=>$user_id));
@@ -258,11 +248,6 @@ class ApptController extends \BaseController {
 		$appt_id = Input::get('appt_id');
 		$user_id = Input::get('user_id');
 
-		// try {
-		// 	$db = new PDO('mysql:host=localhost;dbname=sullivi2_rendezview', 'sullivi2_evan', '3v0lve2oo9!');
-		// } catch(Exception $e) {
-		// 	exit('Unable to connect to database. ApptController@leave');
-		// }
 		// $sql = "DELETE FROM rv_attendees WHERE appt_id = '$appt_id' AND user_id = '$user_id'";
 		// $q = $db->prepare($sql);
 		// $q->execute();
@@ -282,11 +267,6 @@ class ApptController extends \BaseController {
 		$result = $_POST['delegate'];
 		$result_explode = explode('|', $result);
 
-		// try {
-		// 	$db = new PDO('mysql:host=localhost;dbname=sullivi2_rendezview', 'sullivi2_evan', '3v0lve2oo9!');
-		// } catch(Exception $e) {
-		// 	exit('Unable to connect to database. ApptController@delegate');
-		// }
 		// $sql = "UPDATE rv_appts SET user_id=?, created_by=?, updated_by=? WHERE id=?";
 		// $q = $db->prepare($sql);
 		// $q->execute(array($result_explode[1],$result_explode[0],$result_explode[0],$appt_id));
@@ -313,17 +293,9 @@ class ApptController extends \BaseController {
 				if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
 					die();
 				}
-				$db_username = 'sullivi2_evan';
-				$db_password = '3v0lve2oo9!';
-				$db_name = 'sullivi2_rendezview';
-				$db_host = 'localhost';
-				################
-
-				//try connect to db
-				$connecDB = mysqli_connect($db_host, $db_username, $db_password,$db_name)or die('could not connect to database. ApptController@appointmentFinder');
 
 				//trim and lowercase username
-				$username =  strtolower(trim($_POST["username"])); 
+				$username =  strtolower(trim($_POST["username"]));
 
 				//sanitize username
 				$username = filter_var($username, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW|FILTER_FLAG_STRIP_HIGH);
