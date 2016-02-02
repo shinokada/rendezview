@@ -18,6 +18,46 @@ App::before(function($request)
     // {
     //     return Redirect::secure(Request::path());
     // }
+
+		// Global Variables
+    App::singleton('myApp', function(){
+        $app = new stdClass;
+        if (Auth::check())
+				{
+					$app->user = Auth::user()->id;
+					$pdo = DB::connection()->getPdo();
+
+					// master.blade.php
+					// Room list
+					$roomQuery = $pdo->prepare("SELECT room_location, room_name, id FROM rv_rooms ORDER BY room_location, room_name ASC;");
+					$roomQuery->execute();
+					$app->rooms = $roomQuery->fetchAll(PDO::FETCH_GROUP|PDO::FETCH_ASSOC);
+
+					// edit.blade.php
+					// if (isset($appt))
+					// {
+					// 	// Attendee List
+					// 	$getAttendees = $pdo->prepare("SELECT rv_attendees.id AS 'attendees_id', rv_appts.start AS 'appt_start', rv_appts.id AS 'appt_id', rv_users.id AS 'user_id', username, email, title, description FROM rv_appts, rv_users, rv_attendees WHERE rv_users.id=rv_attendees.user_id AND rv_appts.id=rv_attendees.appt_id AND rv_appts.id='$appt->id' ORDER BY rv_attendees.id ASC;");
+					// 	$getAttendees->execute();
+					// 	$app->getAttendeesCount = $getAttendees->rowCount();
+					//
+					// 	//DelegateID
+					// 	$getDelegateID = $pdo->prepare("SELECT rv_attendees.id AS 'attendees_id', rv_attendees.user_id AS 'attendees_user_id', rv_appts.start AS 'appt_start', rv_appts.id AS 'appt_id', rv_users.id 'user_id', username, email, title, description FROM rv_appts, rv_users, rv_attendees WHERE rv_users.id=rv_attendees.user_id AND rv_appts.id=rv_attendees.appt_id AND rv_appts.id='$appt->id' ORDER BY rv_attendees.id ASC;");
+					// 	$getDelegateID->execute();
+					// 	$app->$getDelegateCount = $getDelegateID->rowCount();
+					//
+					// 	//conflict calculator
+					// 	$conflictCounter = $pdo->prepare("SELECT COUNT(*) FROM rv_attendees, rv_users, rv_appts WHERE rv_attendees.user_id = rv_users.id AND rv_attendees.appt_id = rv_appts.id AND rv_users.id='$app->user' AND start < '$appt->end' AND end > '$appt->start';");
+					// 	$conflictCounter->execute();
+					// 	$app->conflictTotal = $conflictCounter->rowCount();
+					// }
+
+					$app->approvalCount = Appt::where('approval', '=', '0')->count();
+        }
+        return $app;
+    });
+    $app = App::make('myApp');
+    View::share('myApp', $app);
 });
 
 
@@ -65,26 +105,6 @@ Route::filter('guest', function()
 {
 	if (Auth::check()) return Redirect::to('user/login/');
 });
-
-
-/*
-|--------------------------------------------------------------------------
-| Role Permissions
-|--------------------------------------------------------------------------
-|
-| Access filters based on roles.
-|
-*/
-
-//Check for role on all admin routes
-Entrust::routeNeedsRole( 'admin*', array('admin'), Redirect::to('/') );
-
-// Check for permissions on admin actions
-Entrust::routeNeedsPermission( 'admin/user*', 'manage_users', Redirect::to('/') );
-//Entrust::routeNeedsPermission( 'admin/role*', 'manage_roles', Redirect::to('/') );
-
-// Check for permissions on widget actions
-Entrust::routeNeedsPermission( 'widgets*', 'manage_widgets', Redirect::to('/') );
 
 /*
 |--------------------------------------------------------------------------

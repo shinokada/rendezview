@@ -21,7 +21,7 @@
 		<!-- Notifications -->
 		@include('notifications')
 		<!-- ./ notifications -->
-		
+
 		<form method="POST" action="{{{ (Confide::checkAction('UserController@store')) ?: URL::to('user')  }}}" accept-charset="UTF-8">
 			<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 			<fieldset>

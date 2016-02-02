@@ -22,7 +22,7 @@
 		@include('notifications')
 		<!-- ./ notifications -->
 
-		<form method="POST" action="{{{ Confide::checkAction('UserController@do_login') ?: URL::to('/user/login') }}}" accept-charset="UTF-8">
+		<form method="POST" action="{{{ Auth::check('UserController@do_login') ?: URL::to('/user/login') }}}" accept-charset="UTF-8">
 			<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 			<fieldset>
 				<div class="form-group">

@@ -4,15 +4,15 @@ return array(
 
     'driver' => 'smtp',
 
-    'host' => 'box1003.bluehost.com',
+    'host' => 'smtp.mandrillapp.com',
 
     'port' => 465,
 
-    'from' => array('address' => 'hello@evan.so', 'name' => 'RendezView'),
+    'from' => array('address' => '', 'name' => 'RendezView'),
 
     'encryption' => 'ssl',
 
-    'username' => 'hello@evan.so',
+    'username' => '',
 
     'password' => '',
 

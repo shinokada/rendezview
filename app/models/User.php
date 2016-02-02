@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends ConfideUser implements UserInterface, RemindableInterface{
+class User extends ConfideUser implements UserInterface, RemindableInterface {
 
 	use HasRole; // Add this trait to your user model
 

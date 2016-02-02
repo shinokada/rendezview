@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://projects.ehumps.me',
+	'url' => 'http://rendezview.ehumps.me',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -108,11 +108,11 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Zizaco\Confide\ConfideServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
-		'Bllim\Datatables\DatatablesServiceProvider',
-		'Jelovac\Bitly4laravel\Bitly4laravelServiceProvider',
-		'Chumper\Datatable\DatatableServiceProvider',
-		'Maatwebsite\Excel\ExcelServiceProvider',
-		'BrainSocket\BrainSocketServiceProvider',
+		// 'Bllim\Datatables\DatatablesServiceProvider',
+		// 'Jelovac\Bitly4laravel\Bitly4laravelServiceProvider',
+		// 'Chumper\Datatable\DatatableServiceProvider',
+		// 'Maatwebsite\Excel\ExcelServiceProvider',
+		// 'BrainSocket\BrainSocketServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider'
 
 	),
@@ -182,10 +182,10 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Confide'         => 'Zizaco\Confide\ConfideFacade',
 		'Entrust'         => 'Zizaco\Entrust\EntrustFacade',
-		'Datatables'      => 'Bllim\Datatables\Datatables',
-		'Datatable' 	  => 'Chumper\Datatable\Facades\DatatableFacade',
-		'Excel' 		  => 'Maatwebsite\Excel\Facades\Excel',
-		'BrainSocket'     => 'BrainSocket\BrainSocketFacade',
+		// 'Datatables'      => 'Bllim\Datatables\Datatables',
+		// 'Datatable' 	  	=> 'Chumper\Datatable\Facades\DatatableFacade',
+		// 'Excel' 		  		=> 'Maatwebsite\Excel\Facades\Excel',
+		// 'BrainSocket'     => 'BrainSocket\BrainSocketFacade',
 
 	),
 

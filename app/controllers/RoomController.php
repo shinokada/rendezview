@@ -92,7 +92,7 @@ class RoomController extends BaseController {
 	public function show($id)
 	{
 		// get the room
-		$room = Room::find($id);
+		$room = Room::findOrFail($id);
 
 		// show the view and pass the room to it
 		return View::make('rooms.show')
@@ -108,7 +108,7 @@ class RoomController extends BaseController {
 	public function edit($id)
 	{
 		// get the room
-		$room = Room::find($id);
+		$room = Room::findOrFail($id);
 
 		// show the edit form and pass the room
 		return View::make('rooms.edit')

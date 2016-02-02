@@ -7,7 +7,7 @@
 
 	<title>
 		@section('title')
-		RendezView
+			RendezView
 		@show
 	</title>
 
@@ -89,15 +89,15 @@
 			counters	: true,
 			searchfield	: true,
 			labels		: {
-			fixed	: !$.mmenu.support.touch
+				fixed	: !$.mmenu.support.touch
 			},
-		header		: {
-			add	: true,
-			update	: true,
-			title	: 'Buildings'
+			header		: {
+				add	: true,
+				update	: true,
+				title	: 'Buildings'
 
-		}
-	});
+			}
+		});
 
 		//	Click a menu-item
 		var $confirm = $('#confirmation');
@@ -112,33 +112,14 @@
 		);
 	});
 	</script>
-	</head>
-{{-- this is terrible and needs to be disposed of --}}
-<?php
-try {
-	$db = new PDO('mysql:host=localhost;dbname=rendezview', 'root', 'root');
-} catch(Exception $e) {
-	exit('Unable to connect to database. master.login');
-}
-$json = array();
-$query = "SELECT * FROM rv_appts WHERE approval = 0";
-$result = $db->query($query) or die(print_r($db->errorInfo()));
-$jsontotal = json_encode($result->fetchAll(PDO::FETCH_ASSOC));
-$approvalcount =  count($task_array = json_decode($jsontotal,true));
-
-$roomQuery = $db->prepare("SELECT room_location, room_name, id FROM rv_rooms ORDER BY room_location, room_name ASC;");
-$roomQuery->execute();
-// $roomQuery->fetchAll(PDO::FETCH_COLUMN|PDO::FETCH_GROUP)
-// $roomListCount = $roomQuery->rowCount();
-$roomResult=$roomQuery->fetchAll(/*PDO::FETCH_COLUMN|*/PDO::FETCH_GROUP|PDO::FETCH_ASSOC);
-?>
+</head>
 <body class="rv-login">
 	<div id="page">
 		<div id="header">
 			<a href="#menu-left" class="menu menu-left fa fa-bars fa-fw fa-2x"></a>
 			<div class="title">RendezView :: Drexel</div>
 			@if (Auth::check())
-			<a href="#menu-right" class="menu-right right fa fa-building-o fa-fw fa-2x"></a>
+				<a href="#menu-right" class="menu-right right fa fa-building-o fa-fw fa-2x"></a>
 			@endif
 		</div>
 		<div id="content">
@@ -148,24 +129,24 @@ $roomResult=$roomQuery->fetchAll(/*PDO::FETCH_COLUMN|*/PDO::FETCH_GROUP|PDO::FET
 		<nav id="menu-left">
 			<div>
 				@if (Auth::check())
-				<p>Welcome, {{{ Auth::user()->username }}}</p>
-				@if (Auth::user()->hasRole('admin'))
-				<ul class="List">
-					<li {{ (Request::is('admin/user*') ? ' class="selected"' : '') }}>
-						<a href="{{{ URL::to('admin/users') }}}"><i class="fa fa-user fa-fw"></i> User Management</a>
-					</li>
-					<li {{ (Request::is('role*') ? ' class="selected"' : '') }}>
-						<a href="{{{ URL::to('admin/roles') }}}"><i class="fa fa-pencil fa-fw"></i> Permissions</a>
-					</li>
-					<li {{ (Request::is('rooms') ? ' class="active"' : '') }}>
-						<a href="{{{ URL::to('rooms') }}}"><i class="fa fa-building-o fa-fw"></i> Rooms</a>
-					</li>
-					<!-- <a href=""></a> -->
-					<!-- <li>
-						<em class="Counter">{{ $approvalcount }}</em>
-						<a href="#"><i class="fa fa-book fa-fw"></i> Meetings Pending Approval</a>
-					</li> -->
-				</ul>
+					<p>Welcome, {{{ Auth::user()->username }}}</p>
+					@if (Auth::user()->hasRole('admin'))
+						<ul class="List">
+							<li {{ (Request::is('admin/user*') ? ' class="selected"' : '') }}>
+								<a href="{{{ URL::to('admin/users') }}}"><i class="fa fa-user fa-fw"></i> User Management</a>
+							</li>
+							<li {{ (Request::is('role*') ? ' class="selected"' : '') }}>
+								<a href="{{{ URL::to('admin/roles') }}}"><i class="fa fa-pencil fa-fw"></i> Permissions</a>
+							</li>
+							<li {{ (Request::is('rooms') ? ' class="active"' : '') }}>
+								<a href="{{{ URL::to('rooms') }}}"><i class="fa fa-building-o fa-fw"></i> Rooms</a>
+							</li>
+							<!-- <a href=""></a> -->
+							<!-- <li>
+							<em class="Counter">{{ $approvalcount }}</em>
+							<a href="#"><i class="fa fa-book fa-fw"></i> Meetings Pending Approval</a>
+						</li> -->
+					</ul>
 				@endif
 				<ul class="List">
 					<li class="{{ (Request::is('/') ? ' active' : '') }}"><a href="{{{ URL::to('') }}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
@@ -177,7 +158,7 @@ $roomResult=$roomQuery->fetchAll(/*PDO::FETCH_COLUMN|*/PDO::FETCH_GROUP|PDO::FET
 						<a href="{{{ URL::to('user/logout') }}}"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
 					</li>
 				</ul>
-				@else
+			@else
 				<ul class="List">
 
 					<li {{ (Request::is('user/login') ? ' class="active"' : '') }}>
@@ -187,60 +168,35 @@ $roomResult=$roomQuery->fetchAll(/*PDO::FETCH_COLUMN|*/PDO::FETCH_GROUP|PDO::FET
 						<a href="{{{ URL::to('user/create') }}}">Sign Up</a>
 					</li>
 				</ul>
-				@endif
-			</div>
-		</nav>
-		@if (Auth::check())
+			@endif
+		</div>
+	</nav>
+	@if (Auth::check())
 		<nav id="menu-right">
 			<ul>
 				<?php
-					foreach($roomResult as $k => $v)
+				$url = $_SERVER['HTTP_HOST'];
+				$protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https://'?'https://':'http://';
+				foreach($myApp->rooms as $k => $v)
+				{
+					echo "<li>
+					<span>$k</span>
+					<ul>";
+					foreach($v as $v)
 					{
 						echo "<li>
-							<span>$k</span>
-							<ul>";
-							//for($b=0;$b<10;$b++)
-							foreach($v as $v)
-							{
-								echo "<li>
-									<a href=\"http://drexel.evan.so/rooms/$v[id]\">
-										$v[room_name]<br />
-									</a>
-								</li>";
-							}
-						echo "</ul></li>";
+						<a href=\"$protocol$url/rooms/$v[id]\">
+						$v[room_name]<br />
+						</a>
+						</li>";
 					}
-					//$roomResult["Rush Building"];
+					echo "</ul></li>";
+				}
 				?>
-				<!-- <li>
-					<span>Building 2</span>
-					<ul>
-						<li>
-							<a href="#">
-								Adam<br />
-								<small>White</small>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								Ben<br />
-								<small>Robinson</small>
-							</a>
-						</li>
-					</ul>
-				</li> -->
 			</ul>
 		</nav>
-		@endif
-	</div>
+	@endif
 </div>
-@if (Auth::check())
-<script type="text/javascript">
-analytics.identify('{{{ Auth::user()->username }}}', {
-name: '{{{ Auth::user()->fullname }}}',
-email: '{{{ Auth::user()->email }}}'
-});
-@endif
-</script>
+</div>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
+// use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNerdsTable extends Migration {
+class CreateAttendeesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,11 @@ class CreateNerdsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('nerds', function(Blueprint $table)
+		Schema::create('attendees', function($table)
 		{
 			$table->increments('id');
-
-			$table->string('name', 255);
-			$table->string('email', 255);
-			$table->integer('nerd_level');
-
+			$table->integer('appt_id');
+			$table->integer('user_id');
 			$table->timestamps();
 		});
 	}
@@ -31,7 +28,7 @@ class CreateNerdsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('nerds');
+		Schema::drop('appts');
 	}
 
 }

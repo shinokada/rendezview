@@ -1,3 +1,6 @@
+var getUrl = window.location;
+var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
 $(function () {
 /*============
 modal message
@@ -14,7 +17,7 @@ modal message
 
     openModal = function (apptID) {
         var apptID = apptID,
-            _eventUrl = '//localhost:8080/appts/'+apptID+'/edit';
+            _eventUrl = baseUrl+'appts/'+apptID+'/edit';
 
         //modal load content
         $edit
@@ -42,7 +45,7 @@ modal message
 /*============
 Upcoming Event Handler
 -----------------*/
-//window.open("http://www.w3schools.com");
+
 
     scope.on('click', '.timeline-panel', function (e){
         console.log('timeline panel clicked');

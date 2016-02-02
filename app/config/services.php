@@ -1,0 +1,3 @@
+'mandrill' => array(
+    'secret' => '',
+),

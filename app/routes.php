@@ -54,7 +54,7 @@ Route::get('ajaxzone',                         'LoginController@ajaxtest');
 // Confide routes
 
 Route::get('user',                         'UserController@index');
-Route::post('user/{user}/update',		   'UserController@update')->where('user', '[0-9]+');
+Route::post('user/{user}/update', 				 'UserController@update')->where('user', '[0-9]+');
 Route::get( 'user/create',                 'UserController@create');
 Route::post('user',                        'UserController@store');
 Route::get( 'user/login',                  'UserController@login');

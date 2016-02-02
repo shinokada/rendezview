@@ -15,10 +15,11 @@ class CreateRoomsTable extends Migration {
         Schema::create('rooms', function($table)
         {
             $table->increments('id');
-            $table->integer('room_admin_id');
+            $table->integer('room_admin');
             $table->string('room_name');
             $table->string('room_location');
             $table->string('room_capacity');
+            $table->string('room_type')->nullable();
             $table->string('created_by');
             $table->string('updated_by');
             $table->timestamps();

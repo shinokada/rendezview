@@ -21,7 +21,7 @@
 		<!-- Notifications -->
 		@include('notifications')
 		<!-- ./ notifications -->
-		
+
 		<form method="POST" action="{{ (Confide::checkAction('UserController@do_forgot_password')) ?: URL::to('/user/forgot') }}" accept-charset="UTF-8">
 			<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 			<div class="form-group">
