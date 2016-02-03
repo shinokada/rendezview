@@ -194,9 +194,9 @@
 					echo "</ul></li>";
 				}
 				?>
-</ul>
-</nav>
-@endif
+			</ul>
+		</nav>
+	@endif
 </div>
 </div>
 </body>

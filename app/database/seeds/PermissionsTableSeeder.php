@@ -11,13 +11,6 @@ class PermissionsTableSeeder extends Seeder {
         $manageUsers->name = 'manage_users';
         $manageUsers->display_name = 'Manage Users';
         $manageUsers->save();
-        
-
-        //Permission 2
-        $manageWidgets = new Permission;
-        $manageWidgets->name = 'manage_widgets';
-        $manageWidgets->display_name = 'Manage Widgets';
-        $manageWidgets->save();
 
         DB::table('permission_role')->delete();
 
@@ -26,14 +19,6 @@ class PermissionsTableSeeder extends Seeder {
             array(
                 'role_id'      => 1,
                 'permission_id' => 1
-            ),
-            array(
-                'role_id'      => 1,
-                'permission_id' => 2
-            ),            
-            array(
-                'role_id'      => 2,
-                'permission_id' => 2
             ),
         );
 

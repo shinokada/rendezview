@@ -75,7 +75,6 @@
 		$('nav#menu-left').mmenu();
 	});
 
-
 	//	The menu on the right
 	$(function() {
 

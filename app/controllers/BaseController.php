@@ -16,7 +16,7 @@ class BaseController extends Controller
      */
     public function __construct()
     {
-        $this->beforeFilter('csrf', array('on' => 'post'));  
+        $this->beforeFilter('csrf', array('on' => 'post'));
         $action = explode('@', Route::current()->getAction()['controller'])[1];
         Log::info($action);
         View::share('action', $action);

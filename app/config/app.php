@@ -2,6 +2,8 @@
 
 return array(
 
+	'cipher' => MCRYPT_RIJNDAEL_256,
+
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
@@ -108,12 +110,12 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Zizaco\Confide\ConfideServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
-		// 'Bllim\Datatables\DatatablesServiceProvider',
+		'Bllim\Datatables\DatatablesServiceProvider'
 		// 'Jelovac\Bitly4laravel\Bitly4laravelServiceProvider',
 		// 'Chumper\Datatable\DatatableServiceProvider',
 		// 'Maatwebsite\Excel\ExcelServiceProvider',
 		// 'BrainSocket\BrainSocketServiceProvider',
-		'Way\Generators\GeneratorsServiceProvider'
+		// 'Way\Generators\GeneratorsServiceProvider'
 
 	),
 
@@ -182,7 +184,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Confide'         => 'Zizaco\Confide\ConfideFacade',
 		'Entrust'         => 'Zizaco\Entrust\EntrustFacade',
-		// 'Datatables'      => 'Bllim\Datatables\Datatables',
+		'Datatables'      => 'Bllim\Datatables\Facade\Datatables',
 		// 'Datatable' 	  	=> 'Chumper\Datatable\Facades\DatatableFacade',
 		// 'Excel' 		  		=> 'Maatwebsite\Excel\Facades\Excel',
 		// 'BrainSocket'     => 'BrainSocket\BrainSocketFacade',
