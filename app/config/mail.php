@@ -4,7 +4,7 @@ return array(
 
     'driver' => 'smtp',
 
-    'host' => 'smtp.mandrillapp.com',
+    'host' => '',
 
     'port' => 465,
 
