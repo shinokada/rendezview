@@ -33,14 +33,14 @@ Two accounts are created by default:
 | admin         | admin         |
 | user          | user          |
 
-The current app/config/local/database.php file expects a MySQL database connection using the following name and credentials (Update these to suit your own setup):
+The current app/config/database.php file expects a MySQL database connection using the following name and credentials (Update these to suit your own setup):
 
 | Database      | Username      | Password      |
 |:-------------:|:-------------:|:-------------:|
 | rendezview    | root          | root          |
 
 
-The app/config/local/mail.php file has been set to `'pretend' => false` - so SMTP settings are required.
+The app/config/mail.php file has been set to `'pretend' => false` - so SMTP settings are required.
 
 
 ## License
