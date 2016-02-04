@@ -2,6 +2,7 @@
 .*
 
 #except for
+!*.example
 !.gitignore
 !.gitkeep
 !.editorconfig
