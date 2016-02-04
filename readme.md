@@ -1,6 +1,6 @@
 # RendezView
 
-A scalable mobile ready room scheduling and appointment management web based application. Tools used in the project include Laravel PHP framework, MySQL, JQuery, and Bootstrap CSS framework.
+A scalable mobile ready room scheduling and appointment management web based application. Tools used in the project include Laravel PHP framework, MySQL, JQuery, and Bootstrap CSS framework.  This project was created at Drexel University as my senior design project in the spring of 2014.
 
 ## Demo
 
@@ -48,13 +48,18 @@ The app/config/mail.php file has been set to `'pretend' => false` - so SMTP sett
 
 This project utilizes several external dependencies as seen in the composer.json file as well as the frameworks and technologies mentioned above:
 
-[way/generators](https://github.com/way/generators/)
-[laravelbook/ardent](https://github.com/laravelbook/ardent/)
-[zizaco/confide](https://github.com/zizaco/confide/)
-[zizaco/entrust](https://github.com/zizaco/entrust/)
-[barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar/)
-[barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf/)
-[bllim/datatables](https://github.com/bllim/datatables/)
+* [way/generators](https://github.com/JeffreyWay/Laravel-4-Generators/)
+* [laravelbook/ardent](https://github.com/laravelbook/ardent/)
+* [zizaco/confide](https://github.com/zizaco/confide/)
+* [zizaco/entrust](https://github.com/zizaco/entrust/)
+* [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar/)
+* [barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf/)
+* [bllim/datatables](https://github.com/bllim/laravel4-datatables-package/)
+* [andrewelkins/Laravel-4-Bootstrap-Starter-Site](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
+* [moment.js](http://momentjs.com/)
+* [mmenu](http://mmenu.frebsite.nl/)
+* [ladda](http://lab.hakim.se/ladda/)
+* [fullCalendar](http://fullcalendar.io/docs1/)
 
 ## License
 
