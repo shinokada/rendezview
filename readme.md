@@ -8,23 +8,25 @@ You can view a live demo of Rendezview [here](http://rendezview.ehumps.me).
 
 ##Requirements and Installation
 
-* I recommend using [vagrant](https://www.vagrantup.com/) for local development.  Included in this repository is a [Vagrantfile](https://github.com/ehumps/rendezview/blob/master/Vagrantfile) and an [installation script](https://github.com/ehumps/rendezview/blob/master/install.sh) to get your local development environment ready.
+* In order to follow the installation steps below you must be using [vagrant](https://www.vagrantup.com/) for local development.  Included in this repository is a [Vagrantfile](https://github.com/ehumps/rendezview/blob/master/Vagrantfile) and an [installation script](https://github.com/ehumps/rendezview/blob/master/install.sh) to mostly automate the setup of your local development environment.
 
 ---
 
-1. Clone the project
+1. Clone the project.
 
-2. In the cloned directory, run `vagrant up` to provision a virtual machine.
+2. In the cloned directory, run `vagrant up`.
 
-3. Once the virtual machine is provisioned, run `vagrant ssh` to ssh into the VM.
+3. Once the virtual machine is provisioned, run `vagrant ssh`.
 
-4. Change directory to the git repository being shared to the VM. `cd ../../vagrant`
+4. Change directory to the git repository being shared to the VM `cd ../../vagrant`.
 
-5. Install composer dependencies `sudo composer install`
+5. Install composer dependencies `sudo composer install`.
 
-6. Migrate and seed the database `php artisan migrate --seed`
+6. Migrate and seed the database `php artisan migrate --seed`.
 
-7. Browse to `http://localhost:8080/`
+7. Duplicate the .htaccess examples `cp .htaccess.example .htaccess` & `cp public/.htaccess.example public/.htaccess`.
+
+8. Browse to `http://localhost:8080/`.
 
 Two accounts are created by default:
 
@@ -33,7 +35,7 @@ Two accounts are created by default:
 | admin         | admin         |
 | user          | user          |
 
-The current app/config/database.php file expects a MySQL database connection using the following name and credentials (Update these to suit your own setup):
+The current app/config/database.php file expects a MySQL database connection using the following name and credentials.  You may update these to suit your own setup if you choose to not run the vagrant steps above:
 
 | Database      | Username      | Password      |
 |:-------------:|:-------------:|:-------------:|
@@ -42,7 +44,18 @@ The current app/config/database.php file expects a MySQL database connection usi
 
 The app/config/mail.php file has been set to `'pretend' => false` - so SMTP settings are required.
 
+## Dependencies
+
+This project utilizes several external dependencies as seen in the composer.json file as well as the frameworks and technologies mentioned above:
+
+[way/generators](https://github.com/way/generators/)
+[laravelbook/ardent](https://github.com/laravelbook/ardent/)
+[zizaco/confide](https://github.com/zizaco/confide/)
+[zizaco/entrust](https://github.com/zizaco/entrust/)
+[barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar/)
+[barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf/)
+[bllim/datatables](https://github.com/bllim/datatables/)
 
 ## License
 
-This is free software distributed under the terms of the MIT license
+Rendezview is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
